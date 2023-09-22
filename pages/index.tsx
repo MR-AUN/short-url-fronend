@@ -39,6 +39,9 @@ export default function Home() {
 
   return (
     <Layout>
+      <Head>
+      <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+      </Head>
       <div className="mt-4  p-5 card bg-base-100 shadow-xl">
         <div className="card-body ">
           <div className='mb-4'>
