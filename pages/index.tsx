@@ -3,6 +3,7 @@ import { withUser } from "@/src/hooks/auth/isAuth";
 import { useShorter } from "@/src/hooks/shorter/mutations";
 import { useGetAllShortByUser } from "@/src/hooks/shorter/queries";
 import { log } from "console";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -76,7 +77,7 @@ export default function Home() {
       </div>
 
 
-      {(dataQuery.data?.length?? 0) > 0  && (
+      {(dataQuery.data?.length ?? 0) > 0 && (
         <div className="mb-10 overflow-x-auto">
           <table className="table">
             {/* head */}
