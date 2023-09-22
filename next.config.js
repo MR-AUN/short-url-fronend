@@ -4,12 +4,11 @@ const nextConfig = {
   async headers() {
     return [
       {
-        
-        source: '/',
+        source: '/(.*)',
         headers: [
           {
-            key: 'Strict-Transport-Security',
-            value: 'max-age=31536000',
+            key: 'Content-Security-Policy',
+            value: "default-src 'self' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://example.com; object-src 'none';",
           },
         ],
       },
