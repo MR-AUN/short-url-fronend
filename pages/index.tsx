@@ -61,13 +61,13 @@ export default function Home() {
             <>
               <div className="mt-4  alert alert-success">
                 <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                <span className='text-sm'>Short url: <a href={`http://localhost:3000/${result.shorter_url}`} target="_blank" rel="noopener noreferrer">{`http://localhost:3000/${result.shorter_url}`}</a></span>
+                <span className='text-sm'>Short url: <a href={`http://146.190.128.82:3000/${result.shorter_url}`} target="_blank" rel="noopener noreferrer">{`http://localhost:3000/${result.shorter_url}`}</a></span>
               </div>
 
 
 
               <div className='flex justify-center'>
-                <img src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${`http://localhost:3000/${result.shorter_url}`}`} className="max-w-sm rounded-lg shadow-2xl" />
+                <img src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${`http://146.190.128.82:3000/${result.shorter_url}`}`} className="max-w-sm rounded-lg shadow-2xl" />
               </div>
             </>
           )}
@@ -108,19 +108,19 @@ export default function Home() {
                     <td>
                       {/* The button to open modal */}
                       <label htmlFor="my_modal_7" className="cursor-pointer">
-                        <img src={`https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=http://localhost:3000/${ele.shorter_url}`} className="max-w-sm rounded-lg shadow-2xl" />
+                        <img src={`https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=http://146.190.128.82:3000/${ele.shorter_url}`} className="max-w-sm rounded-lg shadow-2xl" />
                       </label>
 
                       {/* Put this part before </body> tag */}
                       <input type="checkbox" id="my_modal_7" className="modal-toggle" />
                       <div className="modal">
                         <div className="modal-box flex justify-center">
-                          <img src={`https://api.qrserver.com/v1/create-qr-code/?size=200x300&data=http://localhost:3000/${ele.shorter_url}`} className="max-w-sm rounded-lg shadow-2xl" />
+                          <img src={`https://api.qrserver.com/v1/create-qr-code/?size=200x300&data=http://146.190.128.82:3000/${ele.shorter_url}`} className="max-w-sm rounded-lg shadow-2xl" />
                         </div>
                         <label className="modal-backdrop" htmlFor="my_modal_7">Close</label>
                       </div>
                     </td>
-                    <td><a className="link link-success" href={`http://localhost:3000/${ele.shorter_url}`} target="_blank" rel="noopener noreferrer">{`http://localhost:3000/${ele.shorter_url}`}</a></td>
+                    <td><a className="link link-success" href={`http://146.190.128.82:3000/${ele.shorter_url}`} target="_blank" rel="noopener noreferrer">{`http://146.190.128.82:3000/${ele.shorter_url}`}</a></td>
                     <td><a className="link link-info" href={ele.long_url} target="_blank" rel="noopener noreferrer">{ele.long_url}</a></td>
                     <td>{ele.view_count > 0 && ele.view_count < 10 ? `0${ele.view_count}` : `${ele.view_count}`}</td>
                     <td>{start_date}</td>
