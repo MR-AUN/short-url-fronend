@@ -19,11 +19,6 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools />  
-      
-      <Head>
-        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
-
-      </Head>
       <Component {...pageProps} />
     </QueryClientProvider>
   )
