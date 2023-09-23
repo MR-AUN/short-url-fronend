@@ -1,4 +1,3 @@
-import { getInfoSsr } from "@/src/services/auth.service";
 import { getShortSsr } from "@/src/services/shorter.service";
 import { QueryClient, dehydrate } from "@tanstack/react-query";
 import { GetServerSideProps } from "next";
