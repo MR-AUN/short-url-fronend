@@ -8,12 +8,12 @@ interface LayoutProps {
 const Layout = ({ children }: LayoutProps) => {
     const router = useRouter()
     const { mutate, isLoading, isSuccess } = useSignout();
-    useEffect(() => {
-        if (isSuccess) {
-          
-          router.push("/signin");
-        }
-      }, [isSuccess]);
+    
+
+    const handleSignout = async () =>{
+        await mutate()
+         router.push("/signin");
+    }
     return (
         <div className="min-h-screen bg-base-200 ">
             <div className="navbar bg-base-100 mb-4">
@@ -30,9 +30,7 @@ const Layout = ({ children }: LayoutProps) => {
 
                         </label>
                         <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                            <li><button onClick={() => {
-                                mutate();
-                            }} disabled={isLoading}>Logout</button></li>
+                            <li><button onClick={handleSignout} disabled={isLoading}>Logout</button></li>
                         </ul>
                     </div>
                 </div>

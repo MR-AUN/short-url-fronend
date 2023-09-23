@@ -1,5 +1,5 @@
 import Layout from "@/components/Layout"
-import { withUser } from "@/src/hooks/auth/isAuth";
+import { useGetUserInfo } from "@/src/hooks/auth/queries";
 import { useShorter } from "@/src/hooks/shorter/mutations";
 import { useGetAllShortByUser } from "@/src/hooks/shorter/queries";
 import { log } from "console";
@@ -12,6 +12,7 @@ export default function Home() {
 
   const router = useRouter()
 
+  const {data, isSuccess: userSuccess, isLoading: userLoading} = useGetUserInfo()
   const { mutateAsync: handleShorter, isLoading, isSuccess } = useShorter()
 
   const [url, setUrl] = useState<string>('')
@@ -33,6 +34,10 @@ export default function Home() {
       setUrl('')
     }
   }, [isSuccess])
+
+  useEffect(() => {
+    if (!data) router.push('/signin')
+  }, [userSuccess])
 
   const dataQuery = useGetAllShortByUser()
 
@@ -61,7 +66,7 @@ export default function Home() {
             <>
               <div className="mt-4  alert alert-success">
                 <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                <span className='text-sm'>Short url: <a href={`http://146.190.128.82:3000/${result.shorter_url}`} target="_blank" rel="noopener noreferrer">{`http://localhost:3000/${result.shorter_url}`}</a></span>
+                <span className='text-sm'>Short url: <a href={`http://146.190.128.82:3000/${result.shorter_url}`} target="_blank" rel="noopener noreferrer">{`http://146.190.128.82:3000/${result.shorter_url}`}</a></span>
               </div>
 
 
@@ -140,4 +145,4 @@ export default function Home() {
   )
 }
 
-export const getServerSideProps = withUser();
+// export const getServerSideProps = withUser();

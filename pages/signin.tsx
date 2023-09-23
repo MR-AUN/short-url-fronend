@@ -1,5 +1,6 @@
-import { withoutUser } from "@/src/hooks/auth/isAuth";
+
 import { useSignin } from "@/src/hooks/auth/mutations";
+import { useGetUserInfo } from "@/src/hooks/auth/queries";
 import Head from "next/head";
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react";
@@ -7,6 +8,7 @@ import { useEffect, useState } from "react";
 export default function Signin() {
     const router = useRouter();
 
+    const { data, isSuccess: userSuccess, isLoading: userLoading } = useGetUserInfo()
     const { mutate: handleSignin, isSuccess, isLoading } = useSignin()
 
     // useState
@@ -38,6 +40,10 @@ export default function Signin() {
     }
 
     useEffect(() => {
+        if (data != undefined) router.push('/')
+    }, [userSuccess])
+
+    useEffect(() => {
         if (isSuccess) {
             router.push('/')
         }
@@ -45,7 +51,7 @@ export default function Signin() {
     return (
 
         <div className="hero min-h-screen bg-base-200">
-            
+
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                     <div className="card-body">
@@ -79,4 +85,3 @@ export default function Signin() {
     )
 }
 
-export const getServerSideProps = withoutUser()

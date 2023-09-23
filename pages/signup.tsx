@@ -1,9 +1,11 @@
-import { withoutUser } from "@/src/hooks/auth/isAuth";
+
 import { useSignup } from "@/src/hooks/auth/mutations";
+import { useGetUserInfo } from "@/src/hooks/auth/queries";
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react";
 
 export default function Signup() {
+    const { data, isSuccess: userSuccess, isLoading: userLoading } = useGetUserInfo()
     const router = useRouter()
     const { mutate: handleSignup, isSuccess, isLoading } = useSignup()
 
@@ -21,6 +23,11 @@ export default function Signup() {
     useEffect(() => {
         if (isSuccess) router.push("/");
     }, [isSuccess]);
+
+    useEffect(() => {
+        if (data != undefined) router.push('/')
+    }, [userSuccess])
+
     return (
         <div className="hero min-h-screen bg-base-200">
             <div className="hero-content flex-col lg:flex-row-reverse">
@@ -34,7 +41,7 @@ export default function Signup() {
                                 <input
                                     onChange={(e) => setFormData({ ...formData, username: e.target.value })}
                                     value={formData.username}
-                                    type="text" placeholder="username" className="input input-bordered"  disabled={isLoading}/>
+                                    type="text" placeholder="username" className="input input-bordered" disabled={isLoading} />
                             </div>
                             <div className="form-control">
                                 <label className="label">
@@ -43,7 +50,7 @@ export default function Signup() {
                                 <input type="email"
                                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                                     value={formData.email}
-                                    placeholder="email" className="input input-bordered"  disabled={isLoading} />
+                                    placeholder="email" className="input input-bordered" disabled={isLoading} />
                             </div>
                             <div className="form-control">
                                 <label className="label">
@@ -52,16 +59,16 @@ export default function Signup() {
                                 <input type="password"
                                     onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                                     value={formData.password}
-                                    placeholder="password" className="input input-bordered"  disabled={isLoading} />
+                                    placeholder="password" className="input input-bordered" disabled={isLoading} />
                             </div>
                             <div className="form-control mt-6">
-                                <button type="submit" className="btn btn-primary"  disabled={isLoading}>Sign Up now!</button>
+                                <button type="submit" className="btn btn-primary" disabled={isLoading}>Sign Up now!</button>
                             </div>
                         </form>
                         <div className="form-control mt-4">
                             <button className="btn " onClick={() => {
                                 router.push('signin');
-                            }}  disabled={isLoading}>Sign-in</button>
+                            }} disabled={isLoading}>Sign-in</button>
                         </div>
                     </div>
                 </div>
@@ -69,5 +76,3 @@ export default function Signup() {
         </div>
     )
 }
-
-export const getServerSideProps = withoutUser()

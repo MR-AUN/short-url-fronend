@@ -1,7 +1,14 @@
 import { API_SHORTER } from "@/lib/utils"
 
 export const shorter = async (body: ShorterPayload): Promise<ShorterResponse> => {
-    const result = await API_SHORTER.post(`shorter`, body).then(
+    const tokensString = localStorage.getItem('tokens');
+    const tokens: { accessToken: string } | null = tokensString ? JSON.parse(tokensString) : null;
+    const result = await API_SHORTER.post(`shorter`, body, {
+        headers: {
+            'Authorization': `Bearer ${tokens?.accessToken}`,
+            "Content-Type": 'application/json',
+        }
+    }).then(
         (response) => response.data
     )
 
@@ -9,7 +16,14 @@ export const shorter = async (body: ShorterPayload): Promise<ShorterResponse> =>
 }
 
 export const getAllShortByUser = async (): Promise<ShorterResponse[]> => {
-    const result = await API_SHORTER.get(`shorter`).then((response) => response.data);
+    const tokensString = localStorage.getItem('tokens');
+    const tokens: { accessToken: string } | null = tokensString ? JSON.parse(tokensString) : null;
+    const result = await API_SHORTER.get(`shorter`, {
+        headers: {
+            'Authorization': `Bearer ${tokens?.accessToken}`,
+            "Content-Type": 'application/json',
+        },
+    }).then((response) => response.data);
     return result
 };
 
