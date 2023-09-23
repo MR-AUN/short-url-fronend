@@ -6,7 +6,7 @@ export const API_USER = axios.create({
 })
 
 export const API_SHORTER = axios.create({
-    baseURL: "http://147.182.197.5:8001/",
+    baseURL: "http://147.182.197.5:8002/",
     withCredentials: true
 })
 
