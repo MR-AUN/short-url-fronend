@@ -15,7 +15,7 @@ export const signin = async (body: ISigninPayload): Promise<void> => {
 
 export const signout = async (): Promise<void> => {
 
-    return localStorage.removeItem("tokens");
+    return localStorage.clear();
 };
 
 export const signup = async (body: ISignupPayload): Promise<void> => {
@@ -40,11 +40,13 @@ export const signup = async (body: ISignupPayload): Promise<void> => {
 //     );
 // };
 
-export const getInfoCsr = async (): Promise<ISigninResponse > => {
+export const getInfoCsr = async (): Promise<ISigninResponse | undefined > => {
     try {
         const tokensString = localStorage.getItem('tokens');
-        const tokens: { accessToken: string } | null = tokensString ? JSON.parse(tokensString) : null;
-
+        const tokens: { accessToken: string } | undefined = tokensString ? JSON.parse(tokensString) : undefined;
+        console.log(tokens);
+        if (!tokens) return undefined
+        
         const response = await API_USER.get(`users/me`, {
             headers: {
                 'Authorization': `Bearer ${tokens?.accessToken}`,
@@ -55,6 +57,5 @@ export const getInfoCsr = async (): Promise<ISigninResponse > => {
 
         return { id: user_id, email, accessToken: '' }
     } catch (error) {
-        return  { id: "", email: '', accessToken: '' }
     }
 };

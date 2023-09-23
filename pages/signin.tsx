@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 
 export default function Signin() {
     const router = useRouter();
-
+  
     const { data, isSuccess: userSuccess, isLoading: userLoading } = useGetUserInfo()
     const { mutate: handleSignin, isSuccess, isLoading } = useSignin()
 
@@ -40,7 +40,11 @@ export default function Signin() {
     }
 
     useEffect(() => {
-        if (data != undefined) router.push('/')
+        console.log(data)
+        if (data != undefined ) {
+            router.push('/')
+            
+        }
     }, [userSuccess])
 
     useEffect(() => {

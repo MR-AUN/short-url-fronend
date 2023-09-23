@@ -41,6 +41,7 @@ export const useSignout = () => {
             onMutate: async (info) => {
                 // Cancel any outgoing refetches (so they don't overwrite our optimistic update)
                 await queryClient.cancelQueries(["me"]);
+                queryClient.clear()
 
                 // Snapshot the previous value
                 const previousInfos = queryClient.getQueryData(["me"]);

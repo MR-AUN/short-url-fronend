@@ -36,7 +36,7 @@ export default function Home() {
   }, [isSuccess])
 
   useEffect(() => {
-    if (!data) router.push('/signin')
+    if (data == undefined) router.push('/signin')
   }, [userSuccess])
 
   const dataQuery = useGetAllShortByUser()

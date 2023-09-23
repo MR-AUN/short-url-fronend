@@ -25,7 +25,11 @@ export default function Signup() {
     }, [isSuccess]);
 
     useEffect(() => {
-        if (data != undefined) router.push('/')
+        console.log(data)
+        if ( data != undefined ) {
+            router.push('/')
+            
+        }
     }, [userSuccess])
 
     return (
